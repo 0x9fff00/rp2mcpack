@@ -14,6 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import argparse, json, os, random, shutil, uuid, zipfile
 
+def move_texture(pc_texture, pe_texture):
+    if os.path.isfile(pc_texture):
+        os.rename(pc_texture, pe_texture)
+
 parser = argparse.ArgumentParser(description='Convert Minecraft PC .zip resource packs to PE/Win10 .mcpack resource packs.')
 parser.add_argument('input', help='Input .zip file')
 parser.add_argument('output', help='Output .mcpack file (default: input with .mcpack extension)', nargs='?')
@@ -77,6 +81,50 @@ pack_manifest = {
 }
 
 json.dump(pack_manifest, open(out_dir + '/pack_manifest.json', 'w')) # pack manifest
+
+os.chdir(out_dir + '/textures/')
+move_texture('block/destroy_stage_0.png', 'environment/destroy_stage_0.png')
+move_texture('block/destroy_stage_1.png', 'environment/destroy_stage_1.png')
+move_texture('block/destroy_stage_2.png', 'environment/destroy_stage_2.png')
+move_texture('block/destroy_stage_3.png', 'environment/destroy_stage_3.png')
+move_texture('block/destroy_stage_4.png', 'environment/destroy_stage_4.png')
+move_texture('block/destroy_stage_5.png', 'environment/destroy_stage_5.png')
+move_texture('block/destroy_stage_6.png', 'environment/destroy_stage_6.png')
+move_texture('block/destroy_stage_7.png', 'environment/destroy_stage_7.png')
+move_texture('block/destroy_stage_8.png', 'environment/destroy_stage_8.png')
+move_texture('block/destroy_stage_9.png', 'environment/destroy_stage_9.png')
+move_texture('entity/arrow.png', 'entity/arrows.png')
+move_texture('entity/snowman.png', 'entity/snow_golem.png')
+move_texture('entity/cat/black.png', 'entity/cat/blackcat.png')
+move_texture('entity/chest/normal_double.png', 'entity/chest/double_normal.png')
+move_texture('entity/zombie_pigman.png', 'entity/pig/pigzombie.png')
+move_texture('entity/rabbit/black.png', 'entity/rabbit/blackrabbit.png')
+move_texture('entity/wither/', 'entity/wither_boss/')
+move_texture('items/acacia_boat.png', 'items/boat_acacia.png')
+move_texture('items/birch_boat.png', 'items/boat_birch.png')
+move_texture('items/dark_oak_boat.png', 'items/boat_darkoak.png')
+move_texture('items/jungle_boat.png', 'items/boat_jungle.png')
+move_texture('items/oak_boat.png', 'items/boat_oak.png')
+move_texture('items/spruce_boat.png', 'items/boat_spruce.png')
+move_texture('items/clock_00.png', 'items/clock_item.png')
+move_texture('items/compass_19.png', 'items/compass_item.png')
+move_texture('items/fish_cod_cooked.png', 'items/fish_cooked.png')
+move_texture('items/fish_cod_raw.png', 'items/fish_raw.png')
+move_texture('items/beetroot_seeds.png', 'items/seeds_beetroot.png')
+move_texture('models/armor/chainmail_layer_1.png', 'models/armor/chain_1.png')
+move_texture('models/armor/chainmail_layer_2.png', 'models/armor/chain_2.png')
+move_texture('models/armor/diamond_layer_1.png', 'models/armor/diamond_1.png')
+move_texture('models/armor/diamond_layer_2.png', 'models/armor/diamond_2.png')
+move_texture('models/armor/gold_layer_1.png', 'models/armor/gold_1.png')
+move_texture('models/armor/gold_layer_2.png', 'models/armor/gold_2.png')
+move_texture('models/armor/iron_layer_1.png', 'models/armor/iron_1.png')
+move_texture('models/armor/iron_layer_2.png', 'models/armor/iron_2.png')
+move_texture('painting/paintings_kristoffer_zetterstrand.png', 'painting/kz.png')
+
+if os.path.isfile('blocks/lever.png'):
+    shutil.copy2('blocks/lever.png', 'items/lever.png')
+
+os.chdir('../..')
 
 out_zip = zipfile.ZipFile(args.output, 'w', zipfile.ZIP_DEFLATED)
 os.chdir(out_dir)
