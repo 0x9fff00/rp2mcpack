@@ -22,11 +22,15 @@ if args.description == None:
 
 if args.pack_id == None:
     args.pack_id = str(uuid.uuid4())
-    print('Using Pack UUID ' + args.pack_id + '.')
 
 if args.uuid == None:
     args.uuid = str(uuid.uuid4())
-    print('Using Module UUID ' + args.uuid + '.')
+
+print('Name: ' + args.name)
+print('Version: ' + args.version)
+print('Description: ' + args.description)
+print('Pack UUID: ' + args.pack_id)
+print('Module UUID: ' + args.uuid)
 
 out_dir = 'tempout' + str(random.randint(0, 1000000))
 shutil.copytree(in_dir + '/assets/minecraft/', out_dir) # textures
