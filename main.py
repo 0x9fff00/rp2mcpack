@@ -2,7 +2,7 @@ import argparse, json, os, random, shutil, uuid, zipfile
 
 parser = argparse.ArgumentParser(description='Convert Minecraft PC .zip resource packs to PE/Win10 .mcpack resource packs.')
 parser.add_argument('input', help='Input .zip file')
-parser.add_argument('output', help='Output .mcpack file')
+parser.add_argument('output', help='Output .mcpack file (default: input with .mcpack extension)', nargs='?')
 parser.add_argument('--name', help='Recource pack name (default: input file name)')
 parser.add_argument('--version', help='Recource pack version (default: 0.1)')
 parser.add_argument('--description', help='Recource pack description (default: copy from pack.mcmeta)')
@@ -31,6 +31,9 @@ if args.pack_id == None:
 
 if args.uuid == None:
     args.uuid = str(uuid.uuid4())
+
+if args.output == None:
+    args.output = os.path.splitext(args.input)[0] + '.mcpack'
 
 print('Name: ' + args.name)
 print('Version: ' + args.version)
