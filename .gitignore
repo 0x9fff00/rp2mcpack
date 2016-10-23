@@ -92,3 +92,5 @@ ENV/
 # RP2McPack
 *.zip
 *.mcpack
+tempin*/
+tempout*/
