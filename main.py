@@ -3,8 +3,8 @@ import argparse, json, os, random, shutil, uuid, zipfile
 parser = argparse.ArgumentParser(description='Convert Minecraft PC .zip resource packs to PE/Win10 .mcpack resource packs.')
 parser.add_argument('input', help='Input .zip file')
 parser.add_argument('output', help='Output .mcpack file')
-parser.add_argument('--name', help='Recource pack name', required=True)
-parser.add_argument('--version', help='Recource pack version', required=True)
+parser.add_argument('--name', help='Recource pack name (default: input file name)')
+parser.add_argument('--version', help='Recource pack version (default: 0.1)')
 parser.add_argument('--description', help='Recource pack description (default: copy from pack.mcmeta)')
 parser.add_argument('--pack_id', help='Pack UUID')
 parser.add_argument('--uuid', help='Module UUID')
@@ -14,6 +14,12 @@ in_dir = 'tempin' + str(random.randint(0, 1000000))
 in_zip = zipfile.ZipFile(args.input)
 in_zip.extractall(in_dir)
 in_zip.close()
+
+if args.name == None:
+    args.name = os.path.splitext(args.input)[0]
+
+if args.version == None:
+    args.version = "0.1"
 
 if args.description == None:
     with open(in_dir + '/pack.mcmeta') as mcmeta_json:
