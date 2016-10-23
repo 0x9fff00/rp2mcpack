@@ -61,7 +61,7 @@ print('Module UUID: ' + args.uuid)
 
 out_dir = 'tempout' + str(random.randint(0, 1000000))
 shutil.copytree(in_dir + '/assets/minecraft/', out_dir) # textures
-shutil.copyfile(in_dir + '/pack.png', out_dir + '/pack_icon.png') # icon
+shutil.copy2(in_dir + '/pack.png', out_dir + '/pack_icon.png') # icon
 
 pack_manifest = {
     'header': {
