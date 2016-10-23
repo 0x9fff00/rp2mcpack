@@ -6,8 +6,8 @@ parser.add_argument('output', help='Output .mcpack file')
 parser.add_argument('--name', help='Recource pack name', required=True)
 parser.add_argument('--version', help='Recource pack version', required=True)
 parser.add_argument('--description', help='Recource pack description (default: copy from pack.mcmeta)')
-parser.add_argument('--pack_id', help='Pack UUID (use for future versions of resource pack)')
-parser.add_argument('--uuid', help='Module UUID (use for future versions of resource pack)')
+parser.add_argument('--pack_id', help='Pack UUID')
+parser.add_argument('--uuid', help='Module UUID')
 args = parser.parse_args()
 
 in_dir = 'tempin' + str(random.randint(0, 1000000))
@@ -22,11 +22,11 @@ if args.description == None:
 
 if args.pack_id == None:
     args.pack_id = str(uuid.uuid4())
-    print('Using Pack UUID ' + args.pack_id + '. Use this in --pack_id for future versions.')
+    print('Using Pack UUID ' + args.pack_id + '.')
 
 if args.uuid == None:
     args.uuid = str(uuid.uuid4())
-    print('Using Module UUID ' + args.uuid + '. Use this in --uuid for future versions.')
+    print('Using Module UUID ' + args.uuid + '.')
 
 out_dir = 'tempout' + str(random.randint(0, 1000000))
 shutil.copytree(in_dir + '/assets/minecraft/', out_dir) # textures
