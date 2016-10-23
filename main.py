@@ -26,6 +26,7 @@ parser.add_argument('--version', help='Recource pack version (default: 0.1)')
 parser.add_argument('--description', help='Recource pack description (default: copy from pack.mcmeta)')
 parser.add_argument('--pack_id', help='Pack UUID')
 parser.add_argument('--uuid', help='Module UUID')
+parser.add_argument('--gui-textures', action='store_true', help='Include GUI textures (default: false)')
 args = parser.parse_args()
 
 in_dir = 'tempin' + str(random.randint(0, 1000000))
@@ -123,6 +124,9 @@ move_texture('painting/paintings_kristoffer_zetterstrand.png', 'painting/kz.png'
 
 if os.path.isfile('blocks/lever.png'):
     shutil.copy2('blocks/lever.png', 'items/lever.png')
+
+if not args.gui_textures and os.path.isdir('gui/'):
+    shutil.rmtree('gui/')
 
 os.chdir('../..')
 
